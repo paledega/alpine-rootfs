@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: build
+        run: |
+          apktools=$(wget -O - https://dl-cdn.alpinelinux.org/alpine/edge/main/$arch/ | grep "apk-tools-static" | sed "s/^.*=\"//g;s/\".*//g")
+          REPO="http://dl-cdn.alpinelinux.org/alpine/edge"
+          wget -c "https://dl-cdn.alpinelinux.org/alpine/edge/main/$arch/$apktools" -O apk-tools-static.apk
+          tar -zxf apk-tools-static.apk
+          sudo install sbin/apk.static /bin/apk
+          sudo chmod +x /bin/apk
+          sudo apk --arch x86_64 -X "${REPO}/main/" -U --allow-untrusted --root chroot --initdb add alpine-base bash
+          echo "${REPO}/main/" > ${DESTDIR}/etc/apk/repositories
+          echo "${REPO}/community/" >> ${DESTDIR}/etc/apk/repositories
+          echo "${REPO}/testing/" >> ${DESTDIR}/etc/apk/repositories
+          sudo tar --gz -cf alpine.tar.gz chroot/*
+          sudo mkdir /output
+          sudo mv alpine.tar.gz /output
+
+      - uses: actions/upload-artifact@v2
+        with:
+            name: output
+            path: /output/*
+
+
