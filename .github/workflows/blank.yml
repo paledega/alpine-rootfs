@@ -24,8 +24,8 @@ jobs:
           echo "${REPO}/main/" | sudo tee chroot/etc/apk/repositories ;\
           echo "${REPO}/community/" | sudo tee -a chroot/etc/apk/repositories ;\
           echo "${REPO}/testing/" | sudo tee -a chroot/etc/apk/repositories ;\
-          sudo chroot chroot apk update ;\
-          sudo chroot chroot apk add proot-static ;\
+          sudo apk update --root chroot ;\
+          sudo apk add proot-static --root chroot ;\
           sudo tar --gz -cf alpine.tar.gz chroot/* ;\
           sudo mkdir /output ;\
           sudo mv alpine.tar.gz /output
