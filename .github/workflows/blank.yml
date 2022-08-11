@@ -20,10 +20,11 @@ jobs:
           tar -xf apk-tools-static.apk ;\
           sudo install sbin/apk.static /bin/apk ;\
           sudo chmod +x /bin/apk ;\
-          sudo apk --arch $(uname -m) -X "${REPO}/main/" -U --allow-untrusted --root chroot --initdb add alpine-base bash proot-static ;\
+          sudo apk --arch $(uname -m) -X "${REPO}/main/" -U --allow-untrusted --root chroot --initdb add alpine-base bash;\
           echo "${REPO}/main/" | sudo tee chroot/etc/apk/repositories ;\
           echo "${REPO}/community/" | sudo tee -a chroot/etc/apk/repositories ;\
           echo "${REPO}/testing/" | sudo tee -a chroot/etc/apk/repositories ;\
+          sudo chroot chroot apk add proot-static ;\
           sudo tar --gz -cf alpine.tar.gz chroot/* ;\
           sudo mkdir /output ;\
           sudo mv alpine.tar.gz /output
