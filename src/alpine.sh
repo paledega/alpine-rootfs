@@ -12,8 +12,10 @@ if [[ ! -f ${DESTDIR}/etc/os-release ]] ; then
     rm -rf chroot
     cat /etc/resolv.conf > ${DESTDIR}/etc/resolv.conf
     echo "alpine" > ${DESTDIR}/etc/hostname
+    install ${DESTDIR}/usr/bin/proot.static ${DESTDIR}/proot
 fi
 flatpak-spawn --host xhost + local: &>/dev/null || true
+bash
 exec flatpak-spawn --host --clear-env bwrap --bind ${DESTDIR}/ / \
         --bind / /host \
         --proc /proc \
@@ -26,7 +28,7 @@ exec flatpak-spawn --host --clear-env bwrap --bind ${DESTDIR}/ / \
         --dir /run/user/ \
         --unshare-uts \
         --dev-bind /dev/dri /dev/dri \
-        /usr/bin/proot.static -w / -0 -r / /bin/sh -c "
+        /proot -w / -0 -r / /bin/sh -c "
             export PULSE_SERVER=127.0.0.1
             export USER=root
             export DISPLAY=:0
