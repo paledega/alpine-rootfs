@@ -3,8 +3,8 @@ name: CI
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   build:
@@ -28,9 +28,14 @@ jobs:
           sudo mkdir /output ;\
           sudo mv alpine.tar.gz /output
 
-      - uses: actions/upload-artifact@v2
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-            name: output
-            path: /output/*
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: false
+          title: "Auto build"
+          files: |
+            /output/*
+
 
 
