@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2022 Pale Dega <paledega@yandex.ru> -->
+<component type="desktop-application">
+  <id>io.github.paledega.alpine-rootfs</id>
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>GPL-2.0+</project_license>
+  <name>Alpine Linux</name>
+  <summary>Alpine linux subsystem</summary>
+
+  <description>
+    <p>
+      Easy way to use alpine linux on any distribution.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">io.github.paledega.alpine-rootfs.desktop</launchable>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>General usage</caption>
+      <image>https://paledega.github.io/alpine-rootfs/image.png</image>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">https://paledega.github.io/alpine-rootfs</url>
+  <project_group>ALPINE</project_group>
+
+  <provides>
+    <binary>gnome-power-statistics</binary>
+  </provides>
+
+  <releases>
+    <release version="20220816" date="2022-08-16">
+      <description>
+        <p>flatpak support</p>
+      </description>
+    </release>
+  </releases>
+</component>
