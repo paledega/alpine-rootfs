@@ -5,6 +5,6 @@ Name=Alpine
 GenericName=Alpine Linux
 Comment=Alpine subsystem
 Exec=alpine
-Icon=org.alpine.linux
+Icon=io.github.paledega.alpine-rootfs
 Terminal=true
 Categories=System;
