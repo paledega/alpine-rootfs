@@ -24,13 +24,10 @@
 
   <url type="homepage">https://paledega.github.io/alpine-rootfs</url>
   <project_group>ALPINE</project_group>
-
-  <provides>
-    <binary>gnome-power-statistics</binary>
-  </provides>
-
+  <content_rating type="oars-1.0" />
+  <developer_name>paledega</developer_name>
   <releases>
-    <release version="20220816" date="2022-08-16">
+    <release version="20220916" date="2022-09-16">
       <description>
         <p>flatpak support</p>
       </description>
