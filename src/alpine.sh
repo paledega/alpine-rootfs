@@ -3,7 +3,8 @@ set -e
 mkdir -p ~/.var/app/io.github.paledega.alpine-rootfs/rootfs/
 DESTDIR=$(realpath ~/.var/app/io.github.paledega.alpine-rootfs/rootfs/)
 REPO=http://dl-cdn.alpinelinux.org/alpine/edge
-if [[ ! -f ${DESTDIR}/etc/os-release ]] ; then
+if [[ ! -f ${DESTDIR}/etc/os-release || ! -f ${DESTDIR}/proot ]] ; then
+    rm -rf  ${DESTDIR} || true
     mkdir -p ${DESTDIR}/{dev,sys,proc}
     cd ${DESTDIR}
     tar --exclude dev --exclude sys --exclude proc -xf /app/alpine.tar.gz
