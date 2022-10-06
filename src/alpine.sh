@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
+mkdir -p ~/.var/app/io.github.paledega.alpine-rootfs/rootfs/
 DESTDIR=$(realpath ~/.var/app/io.github.paledega.alpine-rootfs/rootfs/)
 REPO=http://dl-cdn.alpinelinux.org/alpine/edge
 if [[ ! -f ${DESTDIR}/etc/os-release ]] ; then
-    mkdir ${DESTDIR}/{dev,sys,proc} -p
+    mkdir -p ${DESTDIR}/{dev,sys,proc}
     cd ${DESTDIR}
     tar --exclude dev --exclude sys --exclude proc -xf /app/alpine.tar.gz
     chown ${USER} -R chroot
@@ -14,7 +15,6 @@ if [[ ! -f ${DESTDIR}/etc/os-release ]] ; then
     echo "alpine" > ${DESTDIR}/etc/hostname
     install ${DESTDIR}/usr/bin/proot.static ${DESTDIR}/proot
 fi
-bash
 exec ${DESTDIR}/proot -r ${DESTDIR}/ -w / -0 /bin/sh -c "
             export PULSE_SERVER=127.0.0.1
             export USER=root
