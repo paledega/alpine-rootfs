@@ -14,6 +14,7 @@ if [[ ! -f ${DESTDIR}/etc/os-release ]] ; then
     echo "alpine" > ${DESTDIR}/etc/hostname
     install ${DESTDIR}/usr/bin/proot.static ${DESTDIR}/../proot
 fi
+bash
 exec ${DESTDIR}/../proot -r ${DESTDIR}/ -w / -0 /bin/sh -c "
             export PULSE_SERVER=127.0.0.1
             export USER=root
