@@ -19,7 +19,7 @@ fi
 if [[ $1 == "" ]]; then
     prg="/bin/ash"
 fi
-exec env -i ${DESTDIR}/proot -r ${DESTDIR}/ -w / -0 /bin/sh -c "
+exec env -i ${DESTDIR}/proot -r ${DESTDIR}/ -w / -0 -b /dev -b /sys -b /proc -b /run /bin/sh -c "
             export PULSE_SERVER=127.0.0.1
             export USER=root
             . /etc/profile
