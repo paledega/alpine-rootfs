@@ -15,6 +15,7 @@ if [[ ! -f ${DESTDIR}/etc/os-release ]] ; then
     install ${DESTDIR}/usr/bin/proot.static ${DESTDIR}/proot
 fi
 flatpak-spawn --host xhost + local: &>/dev/null || true
+bash
 exec flatpak-spawn --host --clear-env bwrap --bind ${DESTDIR}/ / \
         --bind / /host \
         --proc /proc \
